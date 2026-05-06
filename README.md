@@ -26,7 +26,7 @@ SELECT TOP (1000) [patient_id]
   FROM [hospital data].[dbo].[healthcare_mhmc_dataset_v2$]
 
 
-## Insight Which departments are causing repeated hospital visits (quality issue)
+#Insight Which departments are causing repeated hospital visits (quality issue)
 SELECT 
     Mapped_Department,
     COUNT(*) AS total_patients,
