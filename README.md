@@ -44,7 +44,7 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY risk_of_mortality
 ORDER BY avg_cost DESC;
 
-##Length of Stay vs Cost (Efficiency Analysis)
+## Length of Stay vs Cost (Efficiency Analysis)
 SELECT length_of_stay,
 AVG(total_costs) AS avg_cost,
 COUNT (*) AS patients
@@ -52,7 +52,7 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY length_of_stay
 ORDER BY length_of_stay DESC;
 
-#Top 5 Doctors by Patient Volume
+## Top 5 Doctors by Patient Volume
 
 SELECT TOP 5
     doctor_id,
@@ -61,7 +61,7 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY doctor_id
 ORDER BY total_patients DESC;
 
-#Cost Breakdown per Patient (Advanced),Where is hospital money going?
+## Cost Breakdown per Patient (Advanced),Where is hospital money going?
 SELECT 
     patient_id,
     total_costs,
@@ -71,7 +71,7 @@ SELECT
     (medication_cost * 100.0 / total_costs) AS medication_percent
 FROM healthcare_mhmc_dataset_v2$;
 
-#Monthly Admission Trend,Detect peak hospital periods (seasonality)
+## Monthly Admission Trend,Detect peak hospital periods (seasonality)
 SELECT 
     FORMAT(admission_date, 'yyyy-MM') AS month,
     COUNT(*) AS total_admissions
@@ -79,7 +79,7 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY FORMAT(admission_date, 'yyyy-MM')
 ORDER BY month;
 
-#Readmission by Admission Type,Emergency vs planned admissions impact
+## Readmission by Admission Type,Emergency vs planned admissions impact
 SELECT 
     admission_type,
     COUNT(*) AS total_cases,
@@ -88,7 +88,7 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY admission_type
 ORDER BY readmissions DESC;
 
-#Bed Type Utilization,ICU vs General bed demand
+## Bed Type Utilization,ICU vs General bed demand
 SELECT 
     bed_type,
     COUNT(*) AS usage_count
@@ -96,7 +96,7 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY bed_type
 ORDER BY usage_count DESC;
 
-#Insurance vs Self-Pay Revenue,Revenue drivers in hospital system
+## Insurance vs Self-Pay Revenue,Revenue drivers in hospital system
 SELECT 
     insurance_type,
     SUM(total_costs) AS total_revenue,
@@ -105,14 +105,14 @@ FROM healthcare_mhmc_dataset_v2$
 GROUP BY insurance_type
 ORDER BY total_revenue DESC;
 
-##High-Risk + Long Stay Patients (Critical Cases)Patients needing special attention
+## High-Risk + Long Stay Patients (Critical Cases)Patients needing special attention
 
 SELECT *
 FROM healthcare_mhmc_dataset_v2$
 WHERE risk_of_mortality = 'High'
 AND length_of_stay > 7;
 
-#Rank doctors by cost handled. Which doctors generate most revenue
+## Rank doctors by cost handled. Which doctors generate most revenue
 SELECT 
     doctor_id,
     SUM(total_costs) AS total_revenue,
@@ -120,7 +120,7 @@ SELECT
 FROM healthcare_mhmc_dataset_v2$
 GROUP BY doctor_id;
 
-##Average Cost by City + Department,Geographic cost differences
+## Average Cost by City + Department,Geographic cost differences
 SELECT 
     city,
     Mapped_Department,
